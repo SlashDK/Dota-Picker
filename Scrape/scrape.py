@@ -57,7 +57,7 @@ def readcsv_and_update():
 				print "I FUCKED IT UP"
 	df.to_csv('hero_data.csv', header=None, index=False)
 
-#testing functions
+#testing func tions
 """
 def get_list():
 	list_str = ""
