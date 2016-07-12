@@ -4,11 +4,12 @@ def init(): #put in constructor
     ourTeam=[]
     with open('herodata.csv', 'rb') as csvfile:
         scraped = csv.reader()
+    return (numHeroes, enemyTeam, ourTeam,  scraped)
 
 def add(newRate,currRate):
     return newRate+currRate
 
-def picker():
+def picker(numHeroes, enemyTeam, pickedHeroes, scraped):
     for enemyHero in enemyTeam:
         for i in range(numHeroes):
             winRate[i] = (add(scraped[i][enemyHero], winRate[i][1]),i)
@@ -21,20 +22,22 @@ def picker():
             break
     return bestHeroes
 
-def takeInput():
+def takeInput(enemyTeam, ourTeam):
     team = input("Enter 0 for your team, 1 for enemy team.")
     heroNum = input("Enter hero num.")
     if (team == 0):
         ourTeam.add(heroNum)
     elif (team == 1):
         enemyTeam.add(heroNum)
-    pickedHeroes = enemyTeam + ourTeam
+    return (enemyTeam, ourTeam)
 
 
 def main():
-    init()
+    numHeroes, enemyTeam, ourTeam, scraped =  init()
     while enemyTeam.length<=5:
         for i in range(numHeroes):
             winRate[i]=(0,i)
-        takeInput()
-        picker()
+        enemyTeam, ourTeam = takeInput(enemyTeam, ourTeam)
+        pickedHeroes = enemyTeam + ourTeam
+        bestHeroes = picker(numHeroes, enemyTeam, pickedHeroes, scraped)
+        return bestHeroes
