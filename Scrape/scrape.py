@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from django.utils.text import slugify
 import requests
 import random
+import csv
 
 user_agents = [  
     'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
@@ -18,16 +19,28 @@ user_agents = [
 def get_requests(url):
 	headers={'User-Agent':user_agents[random.randint(0,8)]}
 	r = requests.get(url, headers=headers)
+	# r = requests.get(url)
 	html = r.text.encode('utf8')
 	soup = BeautifulSoup(html, 'lxml')
 	ex = soup.find('table', attrs={'class':"sortable"})
-	print ex
-
+	table_rows = ex.findAll('tr')
+	final_csv_row = []
+	for table_row in table_rows[1:]:
+		row = table_row.findAll('td')
+		hero_name = row[1].text
+		win_rate = row[2]['data-value']
+		final_csv_row.append(dict(name=hero_name, win_rate=win_rate))
+	final_csv_row = sorted(final_csv_row)
+	print "For Phantom Assassin : "
+	for row in final_csv_row:
+		print row['name'], row['win_rate']
+		
 def main():
 	base_url = "http://www.dotabuff.com/heroes/"
 	hero_name = "Phantom Assassin"
 	final_url  = base_url + slugify(hero_name) + "/matchups"
 	get_requests(final_url)
+	# get_requests("http://localhost:8000/test.html")
 
 if __name__ == '__main__':
 	main()
