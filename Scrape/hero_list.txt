@@ -63,6 +63,7 @@ Ogre Magi
 Omniknight
 Oracle
 Outworld Devourer
+Phantom Assassin
 Phantom Lancer
 Phoenix
 Puck

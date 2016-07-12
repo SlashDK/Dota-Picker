@@ -36,24 +36,26 @@ def get_requests_single_hero(url, hero):
 	returnable_list = []
 	for data in final_csv_row:
 		returnable_list.append(data['win_rate'])
+	if hero == "Phantom Assasin":
+		print returnable_list
 	return returnable_list
 
 
 def readcsv_and_update():
-	file = pd.read_csv('hero_data.csv')
-	df = pd.DataFrame(file)
-	df = df.iloc[:, 1:]
+	df = pd.DataFrame()
 	#getting herolist
 	with open('hero_list.txt', 'rb') as file:
 		for thing in file:
-			name = thing[:len(thing)-1]
-			final_url  = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups?date=week"
-			current_attribute = get_requests_single_hero(final_url, name)
-			print name
-			df[name] = pd.Series(current_attribute)
-	df.to_csv('test.csv')
-	os.rename('test.csv', 'hero_data.csv')
-	# os.remove('test.csv')
+			try:
+				name = thing[:len(thing)-1]
+				final_url  = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups?date=week"
+				current_attribute = get_requests_single_hero(final_url, name)
+				df[name] = 4
+				df[name] = pd.Series(current_attribute)
+				print name
+			except:
+				print "I FUCKED IT UP"
+	df.to_csv('hero_data.csv', header=None, index=False)
 
 #testing functions
 """
@@ -62,8 +64,8 @@ def get_list():
 	with open('hero_list.txt', 'rb') as file:
 		for thing in file:
 			name = thing[:len(thing)-1]
-			list_str += "," + name
-	print list_str
+			url = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups?date=week"
+			os.system("wget -c " + url + " -O " + slugify(name) + ".html")
 
 def main():
 	base_url = "http://www.dotabuff.com/heroes/" 
