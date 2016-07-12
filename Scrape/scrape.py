@@ -4,6 +4,7 @@ import requests
 import random
 import csv
 import pandas as pd
+import os
 
 user_agents = [  
     'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
@@ -38,17 +39,23 @@ def get_requests_single_hero(url, hero):
 	return returnable_list
 
 
-def readcsv():
+def readcsv_and_update():
 	file = pd.read_csv('hero_data.csv')
 	df = pd.DataFrame(file)
 	#getting herolist
 	with open('hero_list.txt', 'rb') as file:
 		for thing in file:
 			name = thing[:len(thing)-1]
-			final_url  = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups"
-			current_attribute = get_requests_single_hero(final_url)
-			print df[name]
+			final_url  = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups?date=week"
+			current_attribute = get_requests_single_hero(final_url, name)
+			print name
+			df[name] = pd.Series(current_attribute)
+	df.to_csv('test.csv')
+	os.rename('test.csv', 'hero_data.csv')
+	# os.remove('test.csv')
 
+#testing functions
+"""
 def get_list():
 	list_str = ""
 	with open('hero_list.txt', 'rb') as file:
@@ -63,8 +70,7 @@ def main():
 	final_url  = "http://www.dotabuff.com/heroes/" + slugify(hero_name) + "/matchups"
 	print get_requests_single_hero(final_url, hero_name)
 	# get_requests("http://localhost:8000/test.html")
+"""
 
 if __name__ == '__main__':
-	main()
-	# readcsv()
-	# get_list()
+	readcsv_and_update()
