@@ -3,6 +3,7 @@ from django.utils.text import slugify
 import requests
 import random
 import csv
+import pandas as pd
 
 user_agents = [  
     'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
@@ -16,10 +17,9 @@ user_agents = [
  	'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:41.0) Gecko/20100101 Firefox/41.0'
 ]
 
-def get_requests(url):
+def get_requests_single_hero(url, hero):
 	headers={'User-Agent':user_agents[random.randint(0,8)]}
 	r = requests.get(url, headers=headers)
-	# r = requests.get(url)
 	html = r.text.encode('utf8')
 	soup = BeautifulSoup(html, 'lxml')
 	ex = soup.find('table', attrs={'class':"sortable"})
@@ -30,17 +30,41 @@ def get_requests(url):
 		hero_name = row[1].text
 		win_rate = row[2]['data-value']
 		final_csv_row.append(dict(name=hero_name, win_rate=win_rate))
+	final_csv_row.append(dict(name=hero, win_rate=0))
 	final_csv_row = sorted(final_csv_row)
-	print "For Phantom Assassin : "
-	for row in final_csv_row:
-		print row['name'], row['win_rate']
-		
+	returnable_list = []
+	for data in final_csv_row:
+		returnable_list.append(data['win_rate'])
+	return returnable_list
+
+
+def readcsv():
+	file = pd.read_csv('hero_data.csv')
+	df = pd.DataFrame(file)
+	#getting herolist
+	with open('hero_list.txt', 'rb') as file:
+		for thing in file:
+			name = thing[:len(thing)-1]
+			final_url  = "http://www.dotabuff.com/heroes/" + slugify(name) + "/matchups"
+			current_attribute = get_requests_single_hero(final_url)
+			print df[name]
+
+def get_list():
+	list_str = ""
+	with open('hero_list.txt', 'rb') as file:
+		for thing in file:
+			name = thing[:len(thing)-1]
+			list_str += "," + name
+	print list_str
+
 def main():
-	base_url = "http://www.dotabuff.com/heroes/"
-	hero_name = "Phantom Assassin"
-	final_url  = base_url + slugify(hero_name) + "/matchups"
-	get_requests(final_url)
+	base_url = "http://www.dotabuff.com/heroes/" 
+	hero_name = "Abaddon"
+	final_url  = "http://www.dotabuff.com/heroes/" + slugify(hero_name) + "/matchups"
+	print get_requests_single_hero(final_url, hero_name)
 	# get_requests("http://localhost:8000/test.html")
 
 if __name__ == '__main__':
 	main()
+	# readcsv()
+	# get_list()
