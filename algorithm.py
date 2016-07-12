@@ -9,9 +9,6 @@ def init(): #put in constructor
 def add(newRate,currRate):
     return newRate+currRate
 
-def pickedHeroes():
-
-
 def picker():
     for enemyHero in enemyTeam:
         for i in range(numHeroes):
@@ -25,3 +22,11 @@ def picker():
             break
     return bestHeroes
 
+def input():
+    team = input("Enter 0 for your team, 1 for enemy team.")
+    heroNum = input("Enter hero num.")
+    if(team == 0):
+        ourTeam.add(heroNum)
+    elif (team == 1):
+        enemyTeam.add(heroNum)
+    pickedHeroes = enemyTeam + ourTeam
