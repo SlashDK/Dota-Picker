@@ -42,6 +42,7 @@ def get_requests_single_hero(url, hero):
 def readcsv_and_update():
 	file = pd.read_csv('hero_data.csv')
 	df = pd.DataFrame(file)
+	df = df.iloc[:, 1:]
 	#getting herolist
 	with open('hero_list.txt', 'rb') as file:
 		for thing in file:
