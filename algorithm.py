@@ -5,6 +5,8 @@ def init(): #put in constructor
         winRate[i]=(0,i)
     enemyTeam=[]
     ourTeam=[]
+    with open('herodata.csv', 'rb') as csvfile:
+        scraped = csv.reader()
 
 def add(newRate,currRate):
     return newRate+currRate
