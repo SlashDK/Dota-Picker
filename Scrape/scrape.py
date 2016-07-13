@@ -36,8 +36,6 @@ def get_requests_single_hero(url, hero):
 	returnable_list = []
 	for data in final_csv_row:
 		returnable_list.append(data['win_rate'])
-	if hero == "Phantom Assasin":
-		print returnable_list
 	return returnable_list
 
 
