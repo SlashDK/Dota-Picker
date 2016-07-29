@@ -50,9 +50,9 @@ def readcsv_and_update():
 				current_attribute = get_requests_single_hero(final_url, name)
 				df[name] = 4
 				df[name] = pd.Series(current_attribute)
-				print name
+				print (name)
 			except:
-				print "I FUCKED IT UP"
+				print ("I FUCKED IT UP")
 	df.to_csv('hero_data.csv', header=None, index=False)
 
 #testing func tions
