@@ -1,10 +1,12 @@
 import numpy as np
 import pandas as pd
+import os
 
 def init():
-    scraped = pd.read_csv('hero_data.csv')
+    module_dir = os.path.dirname(__file__)
+    scraped = pd.read_csv(os.path.join(module_dir,'hero_data.csv'))
     scraped = scraped.as_matrix()
-    scraped = scraped[1:][:]
+    # scraped = scraped[1:][:]
     numHeroes = scraped.shape[0]
     return (numHeroes, scraped)
 
@@ -26,8 +28,10 @@ def picker(numHeroes, enemyTeam, pickedHeroes, scraped):
 
 def main(enemyTeam, ourTeam):
     numHeroes, scraped =  init()
+    winRate = []
     for i in range(numHeroes):
-        winRate[i]=(0, i)
+        temp=(0, i)
+        winRate.insert(i,temp)
     pickedHeroes = enemyTeam + ourTeam
     bestHeroes = picker(numHeroes, enemyTeam, pickedHeroes, scraped)
     return bestHeroes
