@@ -2,9 +2,20 @@ import numpy as np
 import pandas as pd
 import os
 
+def mapHeroes(enemyTeam, ourTeam):
+    enemyTeamMapped = []
+    ourTeamMapped = []
+    with open('hero_list.txt') as f:
+        heroList = f.read().splitlines()
+        for hero in enemyTeam:
+            enemyTeamMapped.append(heroList.index(hero.title()))
+        for hero in ourTeam:
+            ourTeamMapped.append(heroList.index(hero.title()))
+    return (enemyTeamMapped, ourTeamMapped)
+
 def init():
-    module_dir = os.path.dirname(__file__)
-    scraped = pd.read_csv(os.path.join(module_dir,'hero_data.csv'), header=None).as_matrix()
+    module_dir = os.path.dirname('__file__')
+    scraped = pd.read_csv(os.path.join(module_dir, 'hero_data.csv'), header=None).as_matrix()
     numHeroes = scraped.shape[0]
     return (numHeroes, scraped)
 
@@ -28,13 +39,13 @@ def main(enemyTeam, ourTeam):
     numHeroes, scraped =  init()
     winRate = []
     for i in range(numHeroes):
-        temp=(0, i)
-        winRate.insert(i,temp)
+        winRate.append((0, i))
     pickedHeroes = enemyTeam + ourTeam
     bestHeroes = picker(numHeroes, enemyTeam, pickedHeroes, scraped, winRate)
     return bestHeroes
 
 enemyTeam = []
 ourTeam = []
+enemyTeam, ourTeam = mapHeroes(enemyTeam, ourTeam)
 bestHeroes = main(enemyTeam, ourTeam)
 print(bestHeroes)
