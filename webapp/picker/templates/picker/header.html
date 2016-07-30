@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Dota Picker</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"
+  crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#heroSubmit").click(function(){
+      var e1 = $("input[name=Enemy1]").val();
+      var e2 = $("input[name=Enemy2]").val();
+      var e3 = $("input[name=Enemy3]").val();
+      var e4 = $("input[name=Enemy4]").val();
+      var e5 = $("input[name=Enemy5]").val();
+      var h1 = $("input[name=Home1]").val();
+      var h2 = $("input[name=Home2]").val();
+      var h3 = $("input[name=Home3]").val();
+      var h4 = $("input[name=Home4]").val();
+      var h5 = $("input[name=Home5]").val();
+      var crsftoken = $("input[name=csrfmiddlewaretoken]").val();
+      var dataString = 'Enemy1=' + e1 + '&Enemy2=' + e2 + '&Enemy3=' + e3 + '&Enemy4=' + e4 + '&Enemy5=' + e5 + '&Home1=' + h1 + '&Home2=' + h2 + '&Home3=' + h3 + '&Home4=' + h4 + '&Home5=' + h5 + '&csrfmiddlewaretoken=' + crsftoken;
+<<<<<<< HEAD
+      $("#results").empty();
+=======
+>>>>>>> origin/master
+      $.ajax({
+        type: "POST",
+        url: "/pick",
+        data: dataString,
+        cache: false,
+        success: function(result){
+<<<<<<< HEAD
+          $("#results").append(result);
+=======
+          alert(result);
+>>>>>>> origin/master
+        }
+      });
+      return false;
+    });
+  });
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-full navbar-dark bg-inverse">
+    <a class="navbar-brand" href="#">Dota Picker</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pick</a>
+      </ul>
+    </nav>
+    <br>
+    <div class="container">
+      <form method="post">{% csrf_token %}
+        <button type="submit" id="heroSubmit" class="btn btn-primary btn-block">Submit</button>
+        <br>
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-header card-success text-xs-center">Home Team</div>
+            <div class="card-block">
+              {% for i in '12345' %}
+              <div class="form-group">
+                <input type="text" class="form-control" id="formGroupExampleInput" name='Home{{i}}' placeholder="Hero {{i}}">
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header card-danger text-xs-center">Enemy Team</div>
+            <div class="card-block">
+              {% for i in '12345' %}
+              <div class="form-group">
+                <input type="text" class="form-control" id="formGroupExampleInput" name='Enemy{{i}}' placeholder="Enemy {{i}}" />
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+
+<<<<<<< HEAD
+      <div id="results" class="container">
+=======
+      <div class="container">        
+>>>>>>> origin/master
+        <!-- Results and/or errors -->
+      </div>
+
+      </ul>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7"
+    crossorigin="anonymous"></script>
+  </body>
+
+  </html>
