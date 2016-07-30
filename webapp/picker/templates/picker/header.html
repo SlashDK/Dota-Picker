@@ -51,8 +51,29 @@
           </div>
         </div>
       </form>
+      <br>
+      {% if results %}
+      <div class="card text-xs-center">
+        <div class="card-header">
+          Pick from these : 
+        </div>
+        <div class="card-block">
+          {% for hero in results %}
+            <button type="button" class="btn btn-success-outline">{{hero}}</button>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+        {% if messages %}
+          <ul class="messages list-group text-xs-center">
+            {% for message in messages %}
+              <li class="list-group-item list-group-item-danger">{{message}}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endif %}
     </div>
-    {% include 'picker/modal.html' %}
+
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7"

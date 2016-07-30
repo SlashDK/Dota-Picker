@@ -5,7 +5,8 @@ import os
 def mapHeroes(enemyTeam, ourTeam):
     enemyTeamMapped = []
     ourTeamMapped = []
-    with open('hero_list.txt') as f:
+    module_dir = os.path.dirname(__file__)
+    with open(os.path.join(module_dir, 'hero_list.txt')) as f:
         heroList = f.read().splitlines()
         for hero in enemyTeam:
             enemyTeamMapped.append(heroList.index(hero.title()))
@@ -13,8 +14,18 @@ def mapHeroes(enemyTeam, ourTeam):
             ourTeamMapped.append(heroList.index(hero.title()))
     return (enemyTeamMapped, ourTeamMapped)
 
+def reverse_map_heroes(final_team):
+    returnable_team = []
+    module_dir = os.path.dirname(__file__)
+    with open(os.path.join(module_dir, 'hero_list.txt')) as f:
+        heroList = f.read().splitlines()
+        for hero in final_team:
+            returnable_team.append(heroList[hero])
+    return returnable_team
+
+
 def init():
-    module_dir = os.path.dirname('__file__')
+    module_dir = os.path.dirname(__file__)
     scraped = pd.read_csv(os.path.join(module_dir, 'hero_data.csv'), header=None).as_matrix()
     numHeroes = scraped.shape[0]
     return (numHeroes, scraped)
@@ -44,8 +55,11 @@ def main(enemyTeam, ourTeam):
     bestHeroes = picker(numHeroes, enemyTeam, pickedHeroes, scraped, winRate)
     return bestHeroes
 
-enemyTeam = []
-ourTeam = []
-enemyTeam, ourTeam = mapHeroes(enemyTeam, ourTeam)
-bestHeroes = main(enemyTeam, ourTeam)
-print(bestHeroes)
+def get_best_heroes(enemyTeam, ourTeam):
+    try:
+        enemyTeam, ourTeam = mapHeroes(enemyTeam, ourTeam)
+        bestHeroes = main(enemyTeam, ourTeam)
+        bestHeroes = reverse_map_heroes(bestHeroes)
+        return bestHeroes
+    except:
+        return None
