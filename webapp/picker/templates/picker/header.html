@@ -26,21 +26,14 @@
       var h5 = $("input[name=Home5]").val();
       var crsftoken = $("input[name=csrfmiddlewaretoken]").val();
       var dataString = 'Enemy1=' + e1 + '&Enemy2=' + e2 + '&Enemy3=' + e3 + '&Enemy4=' + e4 + '&Enemy5=' + e5 + '&Home1=' + h1 + '&Home2=' + h2 + '&Home3=' + h3 + '&Home4=' + h4 + '&Home5=' + h5 + '&csrfmiddlewaretoken=' + crsftoken;
-<<<<<<< HEAD
       $("#results").empty();
-=======
->>>>>>> origin/master
       $.ajax({
         type: "POST",
         url: "/pick",
         data: dataString,
         cache: false,
         success: function(result){
-<<<<<<< HEAD
           $("#results").append(result);
-=======
-          alert(result);
->>>>>>> origin/master
         }
       });
       return false;
@@ -89,12 +82,8 @@
         </div>
       </form>
       <br>
-
-<<<<<<< HEAD
+      
       <div id="results" class="container">
-=======
-      <div class="container">        
->>>>>>> origin/master
         <!-- Results and/or errors -->
       </div>
 
