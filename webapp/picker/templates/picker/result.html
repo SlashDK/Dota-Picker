@@ -1,0 +1,11 @@
+{% if messages %}
+  0
+  {% for message in messages %}
+  {{message}}
+  {% endfor %}
+{% else %}
+  1
+  {% for hero in results %}
+    {{hero}}
+  {% endfor %}
+{% endif %}

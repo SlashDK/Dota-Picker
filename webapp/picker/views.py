@@ -18,5 +18,5 @@ def pick(request):
         results = get_best_heroes(enemy_team, home_team)
         if not results:
             messages.warning(request, 'Please enter valid data')
-        return render(request, 'picker/header.html', {'results':results})
+        return render(request, 'picker/result.html', {'results':results})
     return render(request, 'picker/header.html')
