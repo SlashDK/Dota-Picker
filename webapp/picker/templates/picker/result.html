@@ -1,11 +1,20 @@
-{% if messages %}
-  0
-  {% for message in messages %}
-  {{message}}
-  {% endfor %}
+{% if results %}
+<div class="card text-xs-center">
+  <div class="card-header">
+    Pick from these :
+  </div>
+  <div class="card-block">
+    {% for hero in results %}
+      <button type="button" class="btn btn-success-outline">{{hero}}</button>
+    {% endfor %}
+  </div>
+</div>
 {% else %}
-  1
-  {% for hero in results %}
-    {{hero}}
-  {% endfor %}
+  {% if messages %}
+    <ul class="messages list-group text-xs-center">
+      {% for message in messages %}
+        <li class="list-group-item list-group-item-danger">{{message}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endif %}

@@ -12,32 +12,32 @@
   crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#heroSubmit").click(function(){
-        var e1 = $("input[name=Enemy1]").val();
-        var e2 = $("input[name=Enemy2]").val();
-        var e3 = $("input[name=Enemy3]").val();
-        var e4 = $("input[name=Enemy4]").val();
-        var e5 = $("input[name=Enemy5]").val();
-        var h1 = $("input[name=Home1]").val();
-        var h2 = $("input[name=Home2]").val();
-        var h3 = $("input[name=Home3]").val();
-        var h4 = $("input[name=Home4]").val();
-        var h5 = $("input[name=Home5]").val();
-        var crsftoken = $("input[name=csrfmiddlewaretoken]").val();
-        var dataString = 'Enemy1=' + e1 + '&Enemy2=' + e2 + '&Enemy3=' + e3 + '&Enemy4=' + e4 + '&Enemy5=' + e5 + '&Home1=' + h1 + '&Home2=' + h2 + '&Home3=' + h3 + '&Home4=' + h4 + '&Home5=' + h5 + '&csrfmiddlewaretoken=' + crsftoken;
-        $.ajax({
-          type: "POST",
-          url: "/pick",
-          data: dataString,
-          cache: false,
-          success: function(result){
-            alert(result);
-          }
-        });
-        return false;
+  $(document).ready(function(){
+    $("#heroSubmit").click(function(){
+      var e1 = $("input[name=Enemy1]").val();
+      var e2 = $("input[name=Enemy2]").val();
+      var e3 = $("input[name=Enemy3]").val();
+      var e4 = $("input[name=Enemy4]").val();
+      var e5 = $("input[name=Enemy5]").val();
+      var h1 = $("input[name=Home1]").val();
+      var h2 = $("input[name=Home2]").val();
+      var h3 = $("input[name=Home3]").val();
+      var h4 = $("input[name=Home4]").val();
+      var h5 = $("input[name=Home5]").val();
+      var crsftoken = $("input[name=csrfmiddlewaretoken]").val();
+      var dataString = 'Enemy1=' + e1 + '&Enemy2=' + e2 + '&Enemy3=' + e3 + '&Enemy4=' + e4 + '&Enemy5=' + e5 + '&Home1=' + h1 + '&Home2=' + h2 + '&Home3=' + h3 + '&Home4=' + h4 + '&Home5=' + h5 + '&csrfmiddlewaretoken=' + crsftoken;
+      $.ajax({
+        type: "POST",
+        url: "/pick",
+        data: dataString,
+        cache: false,
+        success: function(result){
+          alert(result);
+        }
       });
+      return false;
     });
+  });
   </script>
 </head>
 
@@ -80,7 +80,13 @@
           </div>
         </div>
       </form>
-      <br>        
+      <br>
+
+      <div class="container">        
+        <!-- Results and/or errors -->
+      </div>
+
+      </ul>
     </div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7"
