@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
+import os
 
 def init():
-    scraped = pd.read_csv('hero_data.csv', header=None).as_matrix()
+    module_dir = os.path.dirname(__file__)
+    scraped = pd.read_csv(os.path.join(module_dir,'hero_data.csv'), header=None).as_matrix()
     numHeroes = scraped.shape[0]
     return (numHeroes, scraped)
 
