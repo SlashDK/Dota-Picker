@@ -38,7 +38,7 @@ Invoker
 Io
 Jakiro
 Juggernaut
-Keeper of the Light
+Keeper Of The Light
 Kunkka
 Legion Commander
 Leshrac
@@ -69,7 +69,7 @@ Phoenix
 Puck
 Pudge
 Pugna
-Queen of Pain
+Queen Of Pain
 Razor
 Riki
 Rubick
