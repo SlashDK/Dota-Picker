@@ -18,5 +18,5 @@ from django.contrib import admin
 from .views import (pick)
 
 urlpatterns = [
-    url(r'^pick', pick),
+    url(r'^', pick),
 ]

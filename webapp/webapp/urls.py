@@ -18,4 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('picker.urls', namespace='picker'))]
+    url(r'^api/', include('picker.api.urls', namespace='picker-api')),
+    url(r'^', include('picker.urls', namespace='picker')),
+    ]
