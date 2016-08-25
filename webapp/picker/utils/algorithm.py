@@ -12,6 +12,7 @@ def mapHeroes(enemyTeam, ourTeam):
             enemyTeamMapped.append(heroList.index(hero.title()))
         for hero in ourTeam:
             ourTeamMapped.append(heroList.index(hero.title()))
+    assert (len(enemyTeamMapped + ourTeamMapped) == len(set(enemyTeamMapped + ourTeamMapped)))
     return (enemyTeamMapped, ourTeamMapped)
 
 def reverse_map_heroes(final_team):
